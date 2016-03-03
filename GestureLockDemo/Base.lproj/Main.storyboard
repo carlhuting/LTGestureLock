@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-T5-nPp" customClass="LTGestureLockView">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="VdK-T5-nPp" secondAttribute="height" id="Vp0-XO-zLN"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="sHE-qF-v6e"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9h-J8-4U3">
+                                <rect key="frame" x="0.0" y="557" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hft-k6-fRh"/>
+                                </constraints>
+                                <state key="normal" title="设置密码"/>
+                                <connections>
+                                    <action selector="resetCodeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lpn-uQ-gAh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7a7-9L-dEB">
+                                <rect key="frame" x="300" y="557" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3dd-rf-0WD"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="P9h-J8-4U3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4QB-oP-eWS"/>
+                            <constraint firstItem="7a7-9L-dEB" firstAttribute="bottom" secondItem="P9h-J8-4U3" secondAttribute="bottom" id="7EJ-HL-Pme"/>
+                            <constraint firstItem="7a7-9L-dEB" firstAttribute="leading" secondItem="P9h-J8-4U3" secondAttribute="trailing" id="AGb-qX-MHt"/>
+                            <constraint firstItem="7a7-9L-dEB" firstAttribute="width" secondItem="P9h-J8-4U3" secondAttribute="width" id="ANG-G5-LNd"/>
+                            <constraint firstAttribute="trailing" secondItem="VdK-T5-nPp" secondAttribute="trailing" priority="750" constant="20" id="IFs-6p-vab"/>
+                            <constraint firstItem="VdK-T5-nPp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KQh-By-fJl"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7a7-9L-dEB" secondAttribute="bottom" constant="13" id="as3-ib-RGt"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="P9h-J8-4U3" secondAttribute="bottom" id="bJM-GA-27k"/>
+                            <constraint firstItem="7a7-9L-dEB" firstAttribute="height" secondItem="P9h-J8-4U3" secondAttribute="height" id="gaM-FE-fdu"/>
+                            <constraint firstAttribute="trailing" secondItem="7a7-9L-dEB" secondAttribute="trailing" id="lm5-MY-SA3"/>
+                            <constraint firstItem="VdK-T5-nPp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="750" constant="20" id="qtT-Et-epc"/>
+                            <constraint firstItem="VdK-T5-nPp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y6z-Kr-cF0"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="bJM-GA-27k"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="gestureLockView" destination="VdK-T5-nPp" id="DST-fx-dyk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408" y="327"/>
+        </scene>
+    </scenes>
+</document>
