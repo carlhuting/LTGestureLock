@@ -15,9 +15,7 @@ const CGFloat linespace = 40.0;
 
 @interface LTGestureLockView () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIBezierPath *polyline;
-@property (nonatomic, strong) UIBezierPath *straight;
 @property (nonatomic, assign) CGPoint lastPoint;
-@property (nonatomic, strong) CAShapeLayer *straightLayer;
 @property (nonatomic, strong) CAShapeLayer *polyLayer;
 @property (nonatomic, copy) NSMutableString *innerCode;
 @property (nonatomic, strong) NSMutableArray<UIView<LTGestureLockNodeProtocol>*> *pointViews;
@@ -52,7 +50,6 @@ const CGFloat linespace = 40.0;
 
 - (void)setHightlightColor:(UIColor *)hightlightColor {
     _hightlightColor = hightlightColor;
-    _straightLayer.strokeColor = hightlightColor.CGColor;
     _polyLayer.strokeColor = hightlightColor.CGColor;
 }
 
@@ -72,20 +69,11 @@ const CGFloat linespace = 40.0;
     [self addGestureRecognizer:_panGestureRecognizer];
     
     _polyline = [UIBezierPath bezierPath];
-    _straight = [UIBezierPath bezierPath];
-    [_straight moveToPoint:CGPointZero];
-    _straightLayer = [CAShapeLayer layer];
-    _straightLayer.path = _straight.CGPath;
-    _straightLayer.fillColor = [UIColor clearColor].CGColor;
-    _straightLayer.strokeColor = [self innerHightlightColor].CGColor;
-    _straightLayer.lineWidth = 2;
-    
     _polyLayer = [CAShapeLayer layer];
     _polyLayer.path = _polyline.CGPath;
     _polyLayer.fillColor = [UIColor clearColor].CGColor;
     _polyLayer.strokeColor = [self innerHightlightColor].CGColor;
     _polyLayer.lineWidth = 2;
-    
     
     [self.layer addSublayer:_polyLayer];
     
@@ -114,16 +102,11 @@ const CGFloat linespace = 40.0;
                 [self.layer addSublayer:_polyLayer];
                 [self.innerCode appendString:@(node.tag).stringValue];
                 node.tag = NSIntegerMax;
-                [self.layer addSublayer:_straightLayer];
             }
         }
             
             break;
         case UIGestureRecognizerStateChanged: {
-            [_straight removeAllPoints];
-            [_straight moveToPoint:_lastPoint];
-            [_straight addLineToPoint:point];
-            _straightLayer.path = _straight.CGPath;
             UIView<LTGestureLockNodeProtocol> *node = (UIView<LTGestureLockNodeProtocol> *)[self pointInView:point];
             if (node && node.tag != NSIntegerMax) {
                 _lastPoint = node.center;
@@ -132,15 +115,18 @@ const CGFloat linespace = 40.0;
                 node.tag = NSIntegerMax;
                 [_polyline addLineToPoint:node.center];
                 _polyLayer.path = _polyline.CGPath;
+            } else {
+                UIBezierPath *tempPath = [_polyline copy];
+                [tempPath addLineToPoint:point];
+                _polyLayer.path = tempPath.CGPath;
             }
         }
             break;
             
         case UIGestureRecognizerStateEnded: {
-            [_straight removeAllPoints];
             !self.gestureCodeChanged ?: self.gestureCodeChanged(_innerCode);
-            [_straightLayer removeFromSuperlayer];
             self.endLock = YES;
+            _polyLayer.path = _polyline.CGPath;
         }
         default:
             break;
@@ -155,9 +141,7 @@ const CGFloat linespace = 40.0;
     self.endLock = NO;
     _innerCode = [[NSMutableString alloc] initWithCapacity:pointCount];
     [self.polyline removeAllPoints];
-    [self.straight removeAllPoints];
     self.polyLayer.path = NULL;
-    self.straightLayer.path = NULL;
     [self.pointViews enumerateObjectsUsingBlock:^(UIView<LTGestureLockNodeProtocol> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.tag = idx;
         [obj highlight:NO color:self.defaultColor];
@@ -179,19 +163,12 @@ const CGFloat linespace = 40.0;
     CAShapeLayer *maskLayer = [CAShapeLayer new];
     maskLayer.frame = self.bounds;
     
-    CAShapeLayer *maskLayer1 = [CAShapeLayer layer];
-    
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRect:self.bounds];
     maskLayer.fillRule = kCAFillRuleEvenOdd;
     maskLayer.lineWidth = 1.0f;
     maskLayer.strokeColor = [UIColor blackColor].CGColor;
     maskLayer.fillColor = [UIColor blackColor].CGColor;
     
-    UIBezierPath *maskPath1 = [UIBezierPath bezierPathWithRect:self.bounds];
-    maskLayer1.fillRule = kCAFillRuleEvenOdd;
-    maskLayer1.lineWidth = 1.0f;
-    maskLayer1.strokeColor = [UIColor blackColor].CGColor;
-    maskLayer1.fillColor = [UIColor blackColor].CGColor;
     CGFloat totalWidth = MIN(CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
     CGFloat width = ( totalWidth - (rowCount - 1) * linespace) / rowCount;
     CGFloat height = width;
@@ -208,12 +185,9 @@ const CGFloat linespace = 40.0;
         obj.frame = CGRectMake(x, y, width, height);
         x += width + linespace;
         [maskPath appendPath:[UIBezierPath bezierPathWithOvalInRect:obj.frame]];
-        [maskPath1 appendPath:[UIBezierPath bezierPathWithOvalInRect:obj.frame]];
     }
     maskLayer.path = maskPath.CGPath;
-    maskLayer1.path = maskPath1.CGPath;
     self.polyLayer.mask = maskLayer;
-    self.straightLayer.mask = maskLayer1;
 }
 
 @end
