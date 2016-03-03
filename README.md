@@ -1,8 +1,8 @@
 # LTGestureLock
 use gesture for your security keeper!
 
-![snapshot](https://github.com/carlhuting/LTGestureLockView/blob/master/LTGestureLockView/image/IMG_0017.PNG)
-![snapshot](https://github.com/carlhuting/LTGestureLockView/blob/master/LTGestureLockView/image/IMG_0018.PNG)
+![snapshot](https://github.com/carlhuting/LTGestureLock/blob/master/image/IMG_0017.PNG)
+![snapshot](https://github.com/carlhuting/LTGestureLock/blob/master/image/IMG_0018.PNG)
 # Features
 
 - Supports blocks
@@ -30,7 +30,7 @@ pod LTGestureLockView
 
 # License
 
-LTGestureLockView is licensed under the terms of the Apache License. Please see the [LICENSE](LICENSE.md) file for full details.
+LTGestureLockView is licensed under the terms of the MIT License. Please see the [LICENSE](https://github.com/carlhuting/LTGestureLock/blob/master/LICENSE) file for full details.
 
 If this code was helpful, I would love to hear from you.
 

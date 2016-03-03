@@ -30,7 +30,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hft-k6-fRh"/>
                                 </constraints>
-                                <state key="normal" title="设置密码"/>
+                                <state key="normal" title="登录"/>
                                 <connections>
                                     <action selector="resetCodeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lpn-uQ-gAh"/>
                                 </connections>
@@ -40,7 +40,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3dd-rf-0WD"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="设置密码"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

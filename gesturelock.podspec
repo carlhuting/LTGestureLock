@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/carlhuting/LTGestureLock"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.screenshots  = "(https://github.com/carlhuting/LTGestureLock/blob/master/image/IMG_0017.PNG)", "(https://github.com/carlhuting/LTGestureLock/blob/master/image/IMG_0018.PNG)"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
